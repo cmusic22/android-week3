@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> mGuests;
     //private static final String GUEST_LIST_KEY = "guest-list-bundle-key";
     private static final String BASE_API_URL = "https://guestlist2417.herokuapp.com/api/guests";
-    private static final String API_KEY = "11770744";
+    private static final String API_KEY = "0099999";
 
     private static final String TAG = "MAIN_ACTIVITY";
 

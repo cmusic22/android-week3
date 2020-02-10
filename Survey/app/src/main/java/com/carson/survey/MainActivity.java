@@ -15,9 +15,10 @@ public class MainActivity extends AppCompatActivity {
     TextView mTacoCount;
     Button mResetButton;
 
+    int pizza = 0;
+    int taco = 0;
 
-
-
+    private static final String SURVEY_KEY = "survey-bundle-key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +31,28 @@ public class MainActivity extends AppCompatActivity {
         mTacoCount = findViewById(R.id.taco_count);
         mResetButton = findViewById(R.id.reset_button);
 
+        if (savedInstanceState != null){
+            pizza = savedInstanceState.getString(SURVEY_KEY, pizzaString);
+            taco = savedInstanceState.getString(SURVEY_KEY, tacoString);
+        }
 
+        if (pizza == 0 & taco == 0){
+            taco = 0;
+            pizza = 0;
+            String pizzaString = String.valueOf(pizza);
+            mPizzaCount.setText(pizzaString);
+            String tacoString = String.valueOf(taco);
+            mTacoCount.setText(tacoString);
+        }
 
         //pizza button click listener includes pizza count
         mPizzaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pizza = 0;
+
                 pizza++;
-                mPizzaCount.setText(pizza);
+                String pizzaString = String.valueOf(pizza);
+                mPizzaCount.setText(pizzaString);
 
             }
         });
@@ -46,25 +60,32 @@ public class MainActivity extends AppCompatActivity {
         mTacoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int taco = 0;
+
                 taco++;
-                mTacoCount.setText(taco);
+                String tacoString = String.valueOf(taco);
+                mTacoCount.setText(tacoString);
             }
         });
         //clear button
         mResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*pizza = 0;
-                mPizzaCount.setText(pizza);
-                taco = 0;
-                mTacoCount.setText(taco);*/
+                int pizza = 0;
+                String pizzaString = String.valueOf(pizza);
+                mPizzaCount.setText(pizzaString);
+                int taco = 0;
+                String tacoString = String.valueOf(taco);
+                mTacoCount.setText(tacoString);
             }
         });
 
+    }
 
-
-
-
+    @Override
+    public void onSaveInstanceState(Bundle outBundle) {
+        super.onSaveInstanceState(outBundle);
+        String pizzaString = String.valueOf(pizza);
+        String tacoString = String.valueOf(taco); 
+        outBundle.putString(SURVEY_KEY, pizzaString, tacoString);
     }
 }
