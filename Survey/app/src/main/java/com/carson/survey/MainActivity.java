@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String SURVEY_KEY = "survey-bundle-key";
 
+    private static final String PIZZA_STATE_KEY = "pizza state";
+    private static final String TACO_STATE_KEY = "taco state";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,18 +35,20 @@ public class MainActivity extends AppCompatActivity {
         mResetButton = findViewById(R.id.reset_button);
 
         if (savedInstanceState != null){
-            pizza = savedInstanceState.getString(SURVEY_KEY, pizzaString);
-            taco = savedInstanceState.getString(SURVEY_KEY, tacoString);
+            // Use the
+            pizza = savedInstanceState.getInt(PIZZA_STATE_KEY, 0);
+            taco = savedInstanceState.getInt(TACO_STATE_KEY, 0);
         }
 
-        if (pizza == 0 & taco == 0){
-            taco = 0;
-            pizza = 0;
+  //      if (pizza == 0 && taco == 0){  // two && but you don't need to check this.
+        //      You'll always set the text in the labels.
+//            taco = 0;    // these statements are not needed
+//            pizza = 0;
             String pizzaString = String.valueOf(pizza);
             mPizzaCount.setText(pizzaString);
             String tacoString = String.valueOf(taco);
             mTacoCount.setText(tacoString);
-        }
+  //      }
 
         //pizza button click listener includes pizza count
         mPizzaButton.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +89,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outBundle) {
         super.onSaveInstanceState(outBundle);
-        String pizzaString = String.valueOf(pizza);
-        String tacoString = String.valueOf(taco); 
-        outBundle.putString(SURVEY_KEY, pizzaString, tacoString);
+        // Put each variable in the bundle individually
+        // You can save them as int values, don't need to convert
+        outBundle.putInt(PIZZA_STATE_KEY, pizza);
+        outBundle.putInt(TACO_STATE_KEY, taco);
     }
 }
